@@ -19,6 +19,15 @@ class ListsController < ApplicationController
   def edit
   end
 
+  def add_movie
+    @list = List.find(params[:id])
+    @movie = Movie.find(params[:movie_id])
+
+    @list.movies << @movie
+
+    redirect_to @list, notice: 'Movie added to list successfully.'
+  end
+
   # POST /lists or /lists.json
   def create
     @list = List.new(list_params)

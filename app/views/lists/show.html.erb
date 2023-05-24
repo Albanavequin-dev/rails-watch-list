@@ -2,6 +2,17 @@
 
 <%= render @list %>
 
+<%= form_with(url: add_movie_list_path(@list), method: :post) do |form| %>
+  <div class="field">
+    <%= form.label :movie_id %>
+    <%= form.collection_select :movie_id, Movie.all, :id, :title %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Add Movie' %>
+  </div>
+<% end %>
+
 <div>
   <%= link_to "Edit this list", edit_list_path(@list) %> |
   <%= link_to "Back to lists", lists_path %>
