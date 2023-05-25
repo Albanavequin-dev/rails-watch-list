@@ -1,24 +1,10 @@
 Rails.application.routes.draw do
-  resources :movies do
-    resources :bookmarks, only: %i[index show create new]
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: "lists#index"
+  resources :lists, except: [:edit, :update] do
+    resources :bookmarks, only: [:new, :create]
+    resources :reviews, only: :create
   end
-
-  resources :lists, only: %i[index show create new] do
-    post 'add_movie', on: :member
-  end
-
-  resources :bookmarks, only: %i[index show create new]
+  resources :bookmarks, only: :destroy
+  resources :reviews, only: :destroy
 end
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-
-    # "delete 'restaurants/:id', to: 'restaurants#destroy'
-    # get 'restaurants', to: 'restaurants#index'
-    # patch 'restaurants/:id', to: 'restaurants#update'
-    # post 'restaurants', to: 'restaurants#create'
-    # get 'restaurants/new' to restaurants#new
-    # get 'restaurants/:id/edit' to restaurants#edit_restaurant
-    # get 'restaurants/:id' to restaurants#show"
